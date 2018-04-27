@@ -123,7 +123,7 @@ public class DrawPane extends JPanel {
 			}
 			// draw numbers
 			g.setColor(Color.BLUE);
-			g.setFont(new Font(Font.DIALOG, Font.ITALIC, 11));
+			g.setFont(new Font(Font.MONOSPACED, Font.ITALIC, 11));
 			// origin
 
 			g.drawString(coordinateSystemInternalOrigin.x + ", " + coordinateSystemInternalOrigin.y,
