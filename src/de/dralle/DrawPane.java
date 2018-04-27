@@ -106,9 +106,9 @@ public class DrawPane extends JPanel {
 			double s1 = getS1();
 
 			// function
-			AbstractSimpleLinearRegresFunction alrf = new AbstractSimpleLinearRegresFunction();
-			alrf.setRate(s0);
-			alrf.setFactor(-s1);
+			SimpleLinearRegresFunction alrf = new SimpleLinearRegresFunction();
+			alrf.setOffset(s0);
+			alrf.setRate(-s1);
 
 			// line
 			g.drawLine(mapXAxis(0), mapYAxis((int) alrf.getY(0)), mapXAxis(coordinateSystemInternalPosSize.width),

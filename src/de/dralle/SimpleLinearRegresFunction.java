@@ -1,5 +1,23 @@
 package de.dralle;
 
-public interface SimpleLinearRegresFunction {
-	double getY(double x);
+public class SimpleLinearRegresFunction implements IFunction{
+	private double offset;
+	public double getOffset() {
+		return offset;
+	}
+	public void setOffset(double offset) {
+		this.offset = offset;
+	}
+	public double getRate() {
+		return rate;
+	}
+	public void setRate(double rate) {
+		this.rate = rate;
+	}
+	private double rate;
+	@Override
+	public double getY(double x) {
+		return offset-rate*x;
+	}
+	
 }

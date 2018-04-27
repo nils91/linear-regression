@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 
 public class Main {
 	static Dimension defaultD=new Dimension(800, 600);
-	static Point coordinateSystemOriginOnScreen=new Point(50, 500);
+	static Point coordinateSystemOriginOnScreen=new Point(50, 480);
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		JFrame f=new JFrame();
@@ -23,6 +23,7 @@ public class Main {
 		f.setVisible(true);
 		//
 		List<Point> pointList=new ArrayList();
+		
 		pointList.add(new Point(0, 1));
 		pointList.add(new Point(1, 1));
 		pointList.add(new Point(2, 4));
@@ -36,7 +37,7 @@ public class Main {
 		DrawPane drawPane = new DrawPane();
 		drawPane.setCoordinateSystemOriginOnScreen(coordinateSystemOriginOnScreen);
 		drawPane.setCoordinateSystemInternalOrigin(new Point(0, 0));
-		drawPane.setCoordinateSystemInternalPosSize(new Dimension(9, 260));
+		drawPane.setCoordinateSystemInternalPosSize(new Dimension(10, 300));
 		drawPane.setxScale(1);
 		drawPane.setyScale(25);
 		drawPane.setPointList(pointList);
