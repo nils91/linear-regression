@@ -2,6 +2,7 @@ package de.dralle;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Iterator;
@@ -117,8 +118,27 @@ public class DrawPane extends JPanel {
 			g.setColor(Color.RED);
 			for (Iterator iterator = pointList.iterator(); iterator.hasNext();) {
 				Point point = (Point) iterator.next();
-				int yCalculated=(int) alrf.getY(point.x);
+				int yCalculated = (int) alrf.getY(point.x);
 				g.drawLine(mapXAxis(point.x), mapYAxis(point.y), mapXAxis(point.x), mapYAxis(yCalculated));
+			}
+			// draw numbers
+			g.setColor(Color.BLUE);
+			g.setFont(new Font(Font.DIALOG, Font.ITALIC, 11));
+			// origin
+
+			g.drawString(coordinateSystemInternalOrigin.x + ", " + coordinateSystemInternalOrigin.y,
+					mapXAxis(coordinateSystemInternalOrigin.x) - 30, mapYAxis(coordinateSystemInternalOrigin.y) + 13);
+			// x axis
+			for (int i = coordinateSystemInternalOrigin.x
+					+ xScale; i < coordinateSystemInternalPosSize.width; i += xScale) {
+				g.drawString(i+"",
+						mapXAxis(i) - 13, mapYAxis(coordinateSystemInternalOrigin.y) + 13);
+			}
+			//y axis
+			for (int i = coordinateSystemInternalOrigin.y
+					+ yScale; i < coordinateSystemInternalPosSize.height; i += yScale) {
+				g.drawString(i+"",
+						mapXAxis(coordinateSystemInternalOrigin.x) - 15, mapYAxis(i) + 13);
 			}
 		}
 

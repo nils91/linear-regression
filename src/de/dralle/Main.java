@@ -17,6 +17,7 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		JFrame f=new JFrame();
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setSize(defaultD);
 		Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
 		f.setLocation(screen.width/2-defaultD.width/2, screen.height/2-defaultD.height/2);
