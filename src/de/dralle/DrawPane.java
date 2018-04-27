@@ -132,8 +132,11 @@ public class DrawPane extends JPanel {
 			alrf.setRate(s1);
 
 			// line
-			g.drawLine(mapXAxis(0), mapYAxis((int) alrf.getY(reverseMapYAxis(0))), mapXAxis(coordinateSystemInternalPosSize.width),
+			g.drawLine(mapXAxis(0), mapYAxis((int) alrf.getY(0)), mapXAxis(coordinateSystemInternalPosSize.width),
 					mapYAxis((int) alrf.getY(coordinateSystemInternalPosSize.width)));
+			// line neg
+			g.drawLine(mapXAxis(0), mapYAxis((int) alrf.getY(0)), mapXAxis(-coordinateSystemInternalPosSize.width),
+					mapYAxis((int) alrf.getY(-coordinateSystemInternalPosSize.width)));
 			// residuals
 			g.setColor(Color.RED);
 			for (Iterator iterator = pointList.iterator(); iterator.hasNext();) {
@@ -193,14 +196,6 @@ public class DrawPane extends JPanel {
 	private int mapYAxis(double v) {
 		return coordinateSystemOriginOnScreen.y
 				- (int) map(v, coordinateSystemInternalPosSize.height, coordinateSystemOriginOnScreen.y);
-	}
-	private int reverseMapXAxis(double v) {
-		return (int) map(v, getSize().width - coordinateSystemOriginOnScreen.x,
-				coordinateSystemInternalPosSize.width)-coordinateSystemOriginOnScreen.x;
-	}
-
-	private int reverseMapYAxis(double v) {
-		return (int) map(v, coordinateSystemInternalPosSize.height, getSize().height-(getSize().height-coordinateSystemOriginOnScreen.y));
 	}
 
 
