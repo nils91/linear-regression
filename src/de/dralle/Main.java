@@ -51,7 +51,7 @@ public class Main {
 		DrawPane drawPane = new DrawPane();
 		drawPane.setCoordinateSystemOriginOnScreen(coordinateSystemOriginOnScreen);
 		drawPane.setCoordinateSystemInternalOrigin(new Point(0, 0));
-		drawPane.setCoordinateSystemInternalPosSize(new Dimension(6, 8));
+		drawPane.setCoordinateSystemInternalPosSize(new Dimension(6, 10));
 		drawPane.setxScale(2);
 		drawPane.setyScale(2);
 		drawPane.setPointList(pointList);
