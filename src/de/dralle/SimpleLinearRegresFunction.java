@@ -17,7 +17,7 @@ public class SimpleLinearRegresFunction implements IFunction{
 	private double rate;
 	@Override
 	public double getY(double x) {
-		return offset-rate*x;
+		return offset+rate*x;
 	}
 	
 }
