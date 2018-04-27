@@ -12,7 +12,7 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-public class DrawPane extends JPanel {
+public class LinearRegresDrawPane extends JPanel {
 	private Point coordinateSystemOriginOnScreen;
 	private Point2D coordinateSystemInternalOrigin;
 	private double functionDefinitionMin;

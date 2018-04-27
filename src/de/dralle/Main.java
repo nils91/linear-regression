@@ -24,7 +24,7 @@ public class Main {
 		f.setLocation(screen.width/2-defaultD.width/2, screen.height/2-defaultD.height/2);
 		f.setVisible(true);
 		
-		DrawPane drawPane = new DrawPane();
+		LinearRegresDrawPane drawPane = new LinearRegresDrawPane();
 		//
 		List<Point2D> pointList=new ArrayList();
 		
