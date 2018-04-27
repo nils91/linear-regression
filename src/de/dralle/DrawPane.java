@@ -96,27 +96,26 @@ public class DrawPane extends JPanel {
 				g.drawLine(coordinateSystemOriginOnScreen.x - 2, mapYAxis(i), coordinateSystemOriginOnScreen.x + 2,
 						mapYAxis(i));
 			}
-			
-			// x neg			
-			int currentInternalPos=coordinateSystemInternalOrigin.x;
+
+			// x neg
+			int currentInternalPos = coordinateSystemInternalOrigin.x;
 			int currentPosOnScreen = coordinateSystemOriginOnScreen.x;
-			while(currentPosOnScreen>0) {
-				currentInternalPos-=xScale;
-				currentPosOnScreen=mapXAxis(currentInternalPos);
-				g.drawLine(currentPosOnScreen, coordinateSystemOriginOnScreen.y - 2,currentPosOnScreen,
+			while (currentPosOnScreen > 0) {
+				currentInternalPos -= xScale;
+				currentPosOnScreen = mapXAxis(currentInternalPos);
+				g.drawLine(currentPosOnScreen, coordinateSystemOriginOnScreen.y - 2, currentPosOnScreen,
 						coordinateSystemOriginOnScreen.y + 2);
 			}
 			// y neg
-			currentInternalPos=coordinateSystemInternalOrigin.y;
+			currentInternalPos = coordinateSystemInternalOrigin.y;
 			currentPosOnScreen = coordinateSystemOriginOnScreen.y;
-			while(currentPosOnScreen<drawArea.height) {
-				currentInternalPos-=yScale;
-				currentPosOnScreen=mapYAxis(currentInternalPos);
-				g.drawLine(coordinateSystemOriginOnScreen.x - 2, currentPosOnScreen, coordinateSystemOriginOnScreen.x + 2,
-						currentPosOnScreen);
+			while (currentPosOnScreen < drawArea.height) {
+				currentInternalPos -= yScale;
+				currentPosOnScreen = mapYAxis(currentInternalPos);
+				g.drawLine(coordinateSystemOriginOnScreen.x - 2, currentPosOnScreen,
+						coordinateSystemOriginOnScreen.x + 2, currentPosOnScreen);
 			}
-						
-						
+
 			// points
 			for (Iterator iterator = pointList.iterator(); iterator.hasNext();) {
 				Point point = (Point) iterator.next();
@@ -139,7 +138,7 @@ public class DrawPane extends JPanel {
 			g.setColor(Color.RED);
 			for (Iterator iterator = pointList.iterator(); iterator.hasNext();) {
 				Point point = (Point) iterator.next();
-				double yCalculated =  alrf.getY(point.x);
+				double yCalculated = alrf.getY(point.x);
 				g.drawLine(mapXAxis(point.x), mapYAxis(point.y), mapXAxis(point.x), mapYAxis(yCalculated));
 			}
 			// draw numbers
@@ -152,14 +151,30 @@ public class DrawPane extends JPanel {
 			// x axis
 			for (int i = coordinateSystemInternalOrigin.x
 					+ xScale; i < coordinateSystemInternalPosSize.width; i += xScale) {
-				g.drawString(i+"",
-						mapXAxis(i) - 13, mapYAxis(coordinateSystemInternalOrigin.y) + 13);
+				g.drawString(i + "", mapXAxis(i) - 13, mapYAxis(coordinateSystemInternalOrigin.y) + 13);
 			}
-			//y axis
+			// y axis
 			for (int i = coordinateSystemInternalOrigin.y
 					+ yScale; i < coordinateSystemInternalPosSize.height; i += yScale) {
-				g.drawString(i+"",
-						mapXAxis(coordinateSystemInternalOrigin.x) - 15, mapYAxis(i) + 13);
+				g.drawString(i + "", mapXAxis(coordinateSystemInternalOrigin.x) - 15, mapYAxis(i) + 13);
+			}
+			// x axis neg
+			currentInternalPos = coordinateSystemInternalOrigin.x;
+			currentPosOnScreen = coordinateSystemOriginOnScreen.x;
+			while (currentPosOnScreen > 0) {
+				currentInternalPos -= xScale;
+				currentPosOnScreen = mapXAxis(currentInternalPos);
+				g.drawString(currentInternalPos + "", currentPosOnScreen - 13,
+						mapYAxis(coordinateSystemInternalOrigin.y) + 13);
+			}
+			// y axis neg
+			currentInternalPos = coordinateSystemInternalOrigin.y;
+			currentPosOnScreen = coordinateSystemOriginOnScreen.y;
+			while (currentPosOnScreen < drawArea.height) {
+				currentInternalPos -= yScale;
+				currentPosOnScreen = mapYAxis(currentInternalPos);
+				g.drawString(currentInternalPos + "", mapXAxis(coordinateSystemInternalOrigin.x) - 15,
+						currentPosOnScreen + 13);
 			}
 		}
 
