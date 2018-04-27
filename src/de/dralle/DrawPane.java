@@ -96,6 +96,27 @@ public class DrawPane extends JPanel {
 				g.drawLine(coordinateSystemOriginOnScreen.x - 2, mapYAxis(i), coordinateSystemOriginOnScreen.x + 2,
 						mapYAxis(i));
 			}
+			
+			// x neg			
+			int currentInternalPos=coordinateSystemInternalOrigin.x;
+			int currentPosOnScreen = coordinateSystemOriginOnScreen.x;
+			while(currentPosOnScreen>0) {
+				currentInternalPos-=xScale;
+				currentPosOnScreen=mapXAxis(currentInternalPos);
+				g.drawLine(currentPosOnScreen, coordinateSystemOriginOnScreen.y - 2,currentPosOnScreen,
+						coordinateSystemOriginOnScreen.y + 2);
+			}
+			// y neg
+			currentInternalPos=coordinateSystemInternalOrigin.y;
+			currentPosOnScreen = coordinateSystemOriginOnScreen.y;
+			while(currentPosOnScreen<drawArea.height) {
+				currentInternalPos-=yScale;
+				currentPosOnScreen=mapYAxis(currentInternalPos);
+				g.drawLine(coordinateSystemOriginOnScreen.x - 2, currentPosOnScreen, coordinateSystemOriginOnScreen.x + 2,
+						currentPosOnScreen);
+			}
+						
+						
 			// points
 			for (Iterator iterator = pointList.iterator(); iterator.hasNext();) {
 				Point point = (Point) iterator.next();
