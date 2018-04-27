@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -13,14 +15,41 @@ import javax.swing.JPanel;
 public class DrawPane extends JPanel {
 	private Point coordinateSystemOriginOnScreen;
 	private Point coordinateSystemInternalOrigin;
-	private List<Point> pointList;
+	private double functionDefinitionMin;
+	private double functionDefinitionMax;
+	private double functionSampleRate;
+	public double getFunctionDefinitionMin() {
+		return functionDefinitionMin;
+	}
 
-	public List<Point> getPointList() {
+	public void setFunctionDefinitionMin(double functionDefinitionMin) {
+		this.functionDefinitionMin = functionDefinitionMin;
+	}
+
+	public double getFunctionefinitionMax() {
+		return functionDefinitionMax;
+	}
+
+	public void setFunctionefinitionMax(double functionefinitionMax) {
+		this.functionDefinitionMax = functionefinitionMax;
+	}
+
+	public double getFunctionSampleRate() {
+		return functionSampleRate;
+	}
+
+	public void setFunctionSampleRate(double functionSampleRate) {
+		this.functionSampleRate = functionSampleRate;
+	}
+
+	private List<Point2D> pointList;
+
+	public List<Point2D> getPointList() {
 		return pointList;
 	}
 
-	public void setPointList(List<Point> pointList) {
-		this.pointList = pointList;
+	public void setPointList(List<Point2D> pointList2) {
+		this.pointList = pointList2;
 	}
 
 	public Point getCoordinateSystemInternalOrigin() {
@@ -118,9 +147,9 @@ public class DrawPane extends JPanel {
 
 			// points
 			for (Iterator iterator = pointList.iterator(); iterator.hasNext();) {
-				Point point = (Point) iterator.next();
-				g.drawLine(mapXAxis(point.x) - 2, mapYAxis(point.y) - 2, mapXAxis(point.x) + 2, mapYAxis(point.y) + 2);
-				g.drawLine(mapXAxis(point.x) - 2, mapYAxis(point.y) + 2, mapXAxis(point.x) + 2, mapYAxis(point.y) - 2);
+				Point2D point = (Point2D) iterator.next();
+				g.drawLine(mapXAxis(point.getX()) - 2, mapYAxis(point.getY()) - 2, mapXAxis(point.getX()) + 2, mapYAxis(point.getY()) + 2);
+				g.drawLine(mapXAxis(point.getX()) - 2, mapYAxis(point.getY()) + 2, mapXAxis(point.getX()) + 2, mapYAxis(point.getY()) - 2);
 			}
 
 			double s0 = getS0();
@@ -132,17 +161,19 @@ public class DrawPane extends JPanel {
 			alrf.setRate(s1);
 
 			// line
-			g.drawLine(mapXAxis(0), mapYAxis((int) alrf.getY(0)), mapXAxis(coordinateSystemInternalPosSize.width),
-					mapYAxis((int) alrf.getY(coordinateSystemInternalPosSize.width)));
-			// line neg
-			g.drawLine(mapXAxis(0), mapYAxis((int) alrf.getY(0)), mapXAxis(-coordinateSystemInternalPosSize.width),
-					mapYAxis((int) alrf.getY(-coordinateSystemInternalPosSize.width)));
+			List<Point2D> functionSamplePoints=new ArrayList<>();
+			for(double x=functionDefinitionMin;x<=functionDefinitionMax;x+=functionSampleRate) {
+				functionSamplePoints.add(new Point2DDouble(x, alrf.getY(x)));
+			}
+			for (int i = 0; i < functionSamplePoints.size()-1; i++) {
+				g.drawLine(mapXAxis(functionSamplePoints.get(i).getX()), mapYAxis(functionSamplePoints.get(i).getY()), mapXAxis(functionSamplePoints.get(i+1).getX()), mapYAxis(functionSamplePoints.get(i+1).getY()));
+			}
 			// residuals
 			g.setColor(Color.RED);
 			for (Iterator iterator = pointList.iterator(); iterator.hasNext();) {
-				Point point = (Point) iterator.next();
-				double yCalculated = alrf.getY(point.x);
-				g.drawLine(mapXAxis(point.x), mapYAxis(point.y), mapXAxis(point.x), mapYAxis(yCalculated));
+				Point2D point = (Point2D) iterator.next();
+				double yCalculated = alrf.getY(point.getX());
+				g.drawLine(mapXAxis(point.getX()), mapYAxis(point.getY()), mapXAxis(point.getX()), mapYAxis(yCalculated));
 			}
 			// draw numbers
 			g.setColor(Color.BLUE);
@@ -202,8 +233,8 @@ public class DrawPane extends JPanel {
 	private double getXAverage() {
 		double sum = 0;
 		for (Iterator iterator = pointList.iterator(); iterator.hasNext();) {
-			Point point = (Point) iterator.next();
-			sum += point.x;
+			Point2D point = (Point2D) iterator.next();
+			sum += point.getX();
 		}
 		return sum / pointList.size();
 	}
@@ -211,8 +242,8 @@ public class DrawPane extends JPanel {
 	private double getYAverage() {
 		double sum = 0;
 		for (Iterator iterator = pointList.iterator(); iterator.hasNext();) {
-			Point point = (Point) iterator.next();
-			sum += point.y;
+			Point2D point = (Point2D) iterator.next();
+			sum += point.getY();
 		}
 		return sum / pointList.size();
 	}
@@ -228,8 +259,8 @@ public class DrawPane extends JPanel {
 	private double getSumAllPointAvgDistance() {
 		double sum = 0;
 		for (Iterator iterator = pointList.iterator(); iterator.hasNext();) {
-			Point point = (Point) iterator.next();
-			sum += (point.x - getXAverage()) * (point.y - getYAverage());
+			Point2D point = (Point2D) iterator.next();
+			sum += (point.getX() - getXAverage()) * (point.getY() - getYAverage());
 		}
 		return sum;
 	}
@@ -237,8 +268,8 @@ public class DrawPane extends JPanel {
 	private double getSumAllPointsXAvgDistSquared() {
 		double sum = 0;
 		for (Iterator iterator = pointList.iterator(); iterator.hasNext();) {
-			Point point = (Point) iterator.next();
-			sum += (point.x - getXAverage()) * (point.x - getXAverage());
+			Point2D point = (Point2D) iterator.next();
+			sum += Math.pow(point.getX() - getXAverage(),2);
 		}
 		return sum;
 	}

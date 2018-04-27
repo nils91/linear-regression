@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,29 +24,29 @@ public class Main {
 		f.setLocation(screen.width/2-defaultD.width/2, screen.height/2-defaultD.height/2);
 		f.setVisible(true);
 		//
-		List<Point> pointList=new ArrayList();
+		List<Point2D> pointList=new ArrayList();
 		
-//		pointList.add(new Point(0, 1));
-//		pointList.add(new Point(1, 1));
-//		pointList.add(new Point(2, 4));
-//		pointList.add(new Point(3, 8));
-//		pointList.add(new Point(4, 16));
-//		pointList.add(new Point(5, 32));
-//		pointList.add(new Point(6, 64));
-//		pointList.add(new Point(7, 128));
-//		pointList.add(new Point(8, 256));
+//		pointList.add(new Point2DDouble(0, 1));
+//		pointList.add(new Point2DDouble(1, 1));
+//		pointList.add(new Point2DDouble(2, 4));
+//		pointList.add(new Point2DDouble(3, 8));
+//		pointList.add(new Point2DDouble(4, 16));
+//		pointList.add(new Point2DDouble(5, 32));
+//		pointList.add(new Point2DDouble(6, 64));
+//		pointList.add(new Point2DDouble(7, 128));
+//		pointList.add(new Point2DDouble(8, 256));
 		
-		pointList.add(new Point(-5, -8));
-		pointList.add(new Point(-4, -4));
-		pointList.add(new Point(-3, -6));
-		pointList.add(new Point(-2, -2));
-		pointList.add(new Point(-1, -3));
-		pointList.add(new Point(0, 2));
-		pointList.add(new Point(1, 4));
-		pointList.add(new Point(2, 1));
-		pointList.add(new Point(3, 3));
-		pointList.add(new Point(4, 6));
-		pointList.add(new Point(5, 6));
+		pointList.add(new Point2DDouble(-5, -8));
+		pointList.add(new Point2DDouble(-4, -4));
+		pointList.add(new Point2DDouble(-3, -6));
+		pointList.add(new Point2DDouble(-2, -2));
+		pointList.add(new Point2DDouble(-1, -3));
+		pointList.add(new Point2DDouble(0, 2));
+		pointList.add(new Point2DDouble(1, 4));
+		pointList.add(new Point2DDouble(2, 1));
+		pointList.add(new Point2DDouble(3, 3));
+		pointList.add(new Point2DDouble(4, 6));
+		pointList.add(new Point2DDouble(5, 6));
 		
 		
 		DrawPane drawPane = new DrawPane();
@@ -54,6 +55,9 @@ public class Main {
 		drawPane.setCoordinateSystemInternalPosSize(new Dimension(6, 10));
 		drawPane.setxScale(2);
 		drawPane.setyScale(2);
+		drawPane.setFunctionDefinitionMin(-5);
+		drawPane.setFunctionefinitionMax(5);
+		drawPane.setFunctionSampleRate(0.5);
 		drawPane.setPointList(pointList);
 		f.add(drawPane);
 	}
