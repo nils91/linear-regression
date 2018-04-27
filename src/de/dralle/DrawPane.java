@@ -118,7 +118,7 @@ public class DrawPane extends JPanel {
 			g.setColor(Color.RED);
 			for (Iterator iterator = pointList.iterator(); iterator.hasNext();) {
 				Point point = (Point) iterator.next();
-				int yCalculated = (int) alrf.getY(point.x);
+				double yCalculated =  alrf.getY(point.x);
 				g.drawLine(mapXAxis(point.x), mapYAxis(point.y), mapXAxis(point.x), mapYAxis(yCalculated));
 			}
 			// draw numbers
@@ -149,12 +149,12 @@ public class DrawPane extends JPanel {
 		return tmp * targetMax;
 	}
 
-	private int mapXAxis(int v) {
+	private int mapXAxis(double v) {
 		return coordinateSystemOriginOnScreen.x + (int) map(v, coordinateSystemInternalPosSize.width,
 				getSize().width - coordinateSystemOriginOnScreen.x);
 	}
 
-	private int mapYAxis(int v) {
+	private int mapYAxis(double v) {
 		return coordinateSystemOriginOnScreen.y
 				- (int) map(v, coordinateSystemInternalPosSize.height, coordinateSystemOriginOnScreen.y);
 	}
