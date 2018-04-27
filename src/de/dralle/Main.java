@@ -44,7 +44,7 @@ public class Main {
 		drawPane.setyScale(25);
 		drawPane.setFunctionDefinitionMin(-1);
 		drawPane.setFunctionefinitionMax(9);
-		drawPane.setFunctionSampleRate(0.5);
+		drawPane.setFunctionSampleRate(1);
 		
 //		pointList.add(new Point2DDouble(-5, -8));
 //		pointList.add(new Point2DDouble(-4, -4));
@@ -64,10 +64,10 @@ public class Main {
 //		drawPane.setyScale(2);
 //		drawPane.setFunctionDefinitionMin(-5);
 //		drawPane.setFunctionefinitionMax(5);
-//		drawPane.setFunctionSampleRate(0.5);
+//		drawPane.setFunctionSampleRate(1);
 		
 		
-		
+		drawPane.setDoubleBuffered(true);
 		drawPane.setCoordinateSystemOriginOnScreen(coordinateSystemOriginOnScreen);		
 		drawPane.setPointList(pointList);
 		f.add(drawPane);
