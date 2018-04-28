@@ -14,10 +14,30 @@ import javax.swing.JPanel;
 
 public class LinearRegresDrawPane extends JPanel {
 	private Point coordinateSystemOriginOnScreen;
-	private Point2D coordinateSystemInternalOrigin=new Point2DDouble(0, 0);
+	private Point2D coordinateSystemInternalOrigin = new Point2DDouble(0, 0);
 	private double functionDefinitionMin;
 	private double functionDefinitionMax;
-	private double functionSampleRate=1;
+	private double functionSampleRate = 1;
+	private boolean drawFunction = true;
+
+	public boolean isDrawFunction() {
+		return drawFunction;
+	}
+
+	public void setDrawFunction(boolean drawFunction) {
+		this.drawFunction = drawFunction;
+	}
+
+	public boolean isDrawResiduals() {
+		return drawResiduals;
+	}
+
+	public void setDrawResiduals(boolean drawResiduals) {
+		this.drawResiduals = drawResiduals;
+	}
+
+	private boolean drawResiduals = true;
+
 	public double getFunctionDefinitionMin() {
 		return functionDefinitionMin;
 	}
@@ -26,11 +46,11 @@ public class LinearRegresDrawPane extends JPanel {
 		this.functionDefinitionMin = functionDefinitionMin;
 	}
 
-	public double getFunctionefinitionMax() {
+	public double getFunctionDefinitionMax() {
 		return functionDefinitionMax;
 	}
 
-	public void setFunctionefinitionMax(double functionefinitionMax) {
+	public void setFunctionDefinitionMax(double functionefinitionMax) {
 		this.functionDefinitionMax = functionefinitionMax;
 	}
 
@@ -148,8 +168,10 @@ public class LinearRegresDrawPane extends JPanel {
 			// points
 			for (Iterator iterator = pointList.iterator(); iterator.hasNext();) {
 				Point2D point = (Point2D) iterator.next();
-				g.drawLine(mapXAxis(point.getX()) - 2, mapYAxis(point.getY()) - 2, mapXAxis(point.getX()) + 2, mapYAxis(point.getY()) + 2);
-				g.drawLine(mapXAxis(point.getX()) - 2, mapYAxis(point.getY()) + 2, mapXAxis(point.getX()) + 2, mapYAxis(point.getY()) - 2);
+				g.drawLine(mapXAxis(point.getX()) - 2, mapYAxis(point.getY()) - 2, mapXAxis(point.getX()) + 2,
+						mapYAxis(point.getY()) + 2);
+				g.drawLine(mapXAxis(point.getX()) - 2, mapYAxis(point.getY()) + 2, mapXAxis(point.getX()) + 2,
+						mapYAxis(point.getY()) - 2);
 			}
 
 			double s0 = getS0();
@@ -161,19 +183,27 @@ public class LinearRegresDrawPane extends JPanel {
 			alrf.setRate(s1);
 
 			// line
-			List<Point2D> functionSamplePoints=new ArrayList<>();
-			for(double x=functionDefinitionMin;x<=functionDefinitionMax;x+=functionSampleRate) {
-				functionSamplePoints.add(new Point2DDouble(x, alrf.getY(x)));
+			if (drawFunction) {
+				List<Point2D> functionSamplePoints = new ArrayList<>();
+				for (double x = functionDefinitionMin; x <= functionDefinitionMax; x += functionSampleRate) {
+					functionSamplePoints.add(new Point2DDouble(x, alrf.getY(x)));
+				}
+				for (int i = 0; i < functionSamplePoints.size() - 1; i++) {
+					g.drawLine(mapXAxis(functionSamplePoints.get(i).getX()),
+							mapYAxis(functionSamplePoints.get(i).getY()),
+							mapXAxis(functionSamplePoints.get(i + 1).getX()),
+							mapYAxis(functionSamplePoints.get(i + 1).getY()));
+				}
 			}
-			for (int i = 0; i < functionSamplePoints.size()-1; i++) {
-				g.drawLine(mapXAxis(functionSamplePoints.get(i).getX()), mapYAxis(functionSamplePoints.get(i).getY()), mapXAxis(functionSamplePoints.get(i+1).getX()), mapYAxis(functionSamplePoints.get(i+1).getY()));
-			}
-			// residuals
-			g.setColor(Color.RED);
-			for (Iterator iterator = pointList.iterator(); iterator.hasNext();) {
-				Point2D point = (Point2D) iterator.next();
-				double yCalculated = alrf.getY(point.getX());
-				g.drawLine(mapXAxis(point.getX()), mapYAxis(point.getY()), mapXAxis(point.getX()), mapYAxis(yCalculated));
+			if (drawResiduals) {
+				// residuals
+				g.setColor(Color.RED);
+				for (Iterator iterator = pointList.iterator(); iterator.hasNext();) {
+					Point2D point = (Point2D) iterator.next();
+					double yCalculated = alrf.getY(point.getX());
+					g.drawLine(mapXAxis(point.getX()), mapYAxis(point.getY()), mapXAxis(point.getX()),
+							mapYAxis(yCalculated));
+				}
 			}
 			// draw numbers
 			g.setColor(Color.BLUE);
@@ -181,7 +211,8 @@ public class LinearRegresDrawPane extends JPanel {
 			// origin
 
 			g.drawString(coordinateSystemInternalOrigin.getX() + ", " + coordinateSystemInternalOrigin.getY(),
-					mapXAxis(coordinateSystemInternalOrigin.getX()) - 30, mapYAxis(coordinateSystemInternalOrigin.getY()) + 13);
+					mapXAxis(coordinateSystemInternalOrigin.getX()) - 30,
+					mapYAxis(coordinateSystemInternalOrigin.getY()) + 13);
 			// x axis
 			for (double i = coordinateSystemInternalOrigin.getX()
 					+ xScale; i < coordinateSystemInternalPosSize.width; i += xScale) {
@@ -229,7 +260,6 @@ public class LinearRegresDrawPane extends JPanel {
 				- (int) map(v, coordinateSystemInternalPosSize.height, coordinateSystemOriginOnScreen.y);
 	}
 
-
 	private double getXAverage() {
 		double sum = 0;
 		for (Iterator iterator = pointList.iterator(); iterator.hasNext();) {
@@ -269,7 +299,7 @@ public class LinearRegresDrawPane extends JPanel {
 		double sum = 0;
 		for (Iterator iterator = pointList.iterator(); iterator.hasNext();) {
 			Point2D point = (Point2D) iterator.next();
-			sum += Math.pow(point.getX() - getXAverage(),2);
+			sum += Math.pow(point.getX() - getXAverage(), 2);
 		}
 		return sum;
 	}
