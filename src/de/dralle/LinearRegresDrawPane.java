@@ -14,10 +14,10 @@ import javax.swing.JPanel;
 
 public class LinearRegresDrawPane extends JPanel {
 	private Point coordinateSystemOriginOnScreen;
-	private Point2D coordinateSystemInternalOrigin;
+	private Point2D coordinateSystemInternalOrigin=new Point2DDouble(0, 0);
 	private double functionDefinitionMin;
 	private double functionDefinitionMax;
-	private double functionSampleRate;
+	private double functionSampleRate=1;
 	public double getFunctionDefinitionMin() {
 		return functionDefinitionMin;
 	}
