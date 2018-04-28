@@ -19,6 +19,15 @@ public class LinearRegresDrawPane extends JPanel {
 	private double functionDefinitionMax;
 	private double functionSampleRate = 1;
 	private boolean drawFunction = true;
+	private int k=0;
+
+	public int getK() {
+		return k;
+	}
+
+	public void setK(int k) {
+		this.k = k;
+	}
 
 	public boolean isDrawFunction() {
 		return drawFunction;
