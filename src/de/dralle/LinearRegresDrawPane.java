@@ -12,6 +12,13 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import org.apache.commons.math3.linear.Array2DRowRealMatrix;
+import org.apache.commons.math3.linear.ArrayRealVector;
+import org.apache.commons.math3.linear.DecompositionSolver;
+import org.apache.commons.math3.linear.LUDecomposition;
+import org.apache.commons.math3.linear.RealMatrix;
+import org.apache.commons.math3.linear.RealVector;
+
 public class LinearRegresDrawPane extends JPanel {
 	private Point coordinateSystemOriginOnScreen;
 	private Point2D coordinateSystemInternalOrigin = new Point2DDouble(0, 0);
@@ -19,7 +26,7 @@ public class LinearRegresDrawPane extends JPanel {
 	private double functionDefinitionMax;
 	private double functionSampleRate = 1;
 	private boolean drawFunction = true;
-	private int k=0;
+	private int k=1;
 
 	public int getK() {
 		return k;
@@ -133,6 +140,24 @@ public class LinearRegresDrawPane extends JPanel {
 
 	private void drawCoordinateSystem(Graphics g) {
 		if (coordinateSystemOriginOnScreen != null) {
+			//do matrix stuff
+			RealVector y=new ArrayRealVector(new double[pointList.size()]);
+			for (int i = 0; i < pointList.size(); i++) {
+				y.setEntry(i,pointList.get(i).getY());
+			}
+			RealMatrix xMatrix=new Array2DRowRealMatrix(pointList.size(), k+1);
+			for (int i = 0; i < k+1; i++) {
+				for (int j = 0; j < pointList.size(); j++) {					
+					xMatrix.setEntry(j, i, Math.pow(pointList.get(j).getX(), i));			
+					
+				}
+			}
+			RealMatrix xMatrixMultipliedWithItselfTransposed = xMatrix.transpose().multiply(xMatrix);
+			DecompositionSolver solver=new LUDecomposition(xMatrixMultipliedWithItselfTransposed).getSolver();
+			RealMatrix inverse = solver.getInverse();
+			RealMatrix inverseWithXMatrixTransposed = inverse.multiply(xMatrix.transpose());
+			RealVector weights = inverseWithXMatrixTransposed.operate(y);
+			
 			Dimension drawArea = getSize();
 			g.setColor(Color.BLACK);
 			// draw lines

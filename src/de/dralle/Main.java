@@ -22,7 +22,6 @@ public class Main {
 		f.setSize(defaultD);
 		Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
 		f.setLocation(screen.width/2-defaultD.width/2, screen.height/2-defaultD.height/2);
-		f.setVisible(true);
 		
 		LinearRegresDrawPane drawPane = new LinearRegresDrawPane();
 		//
@@ -55,8 +54,8 @@ public class Main {
 		pointList.add(new Point2DDouble(195, 95));
 		pointList.add(new Point2DDouble(199, 100));
 		coordinateSystemOriginOnScreen=new Point(50,550);
-		drawPane.setDrawFunction(false);
-		drawPane.setDrawResiduals(false);
+		drawPane.setDrawFunction(true);
+		drawPane.setDrawResiduals(true);
 		drawPane.setCoordinateSystemInternalOrigin(new Point2DDouble(0, 0));
 		drawPane.setCoordinateSystemInternalPosSize(new Dimension(220, 110));
 		drawPane.setxScale(10);
@@ -90,5 +89,6 @@ public class Main {
 		drawPane.setCoordinateSystemOriginOnScreen(coordinateSystemOriginOnScreen);		
 		drawPane.setPointList(pointList);
 		f.add(drawPane);
+		f.setVisible(true);
 	}
 }
