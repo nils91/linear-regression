@@ -208,10 +208,16 @@ public class LinearRegresDrawPane extends JPanel {
 						mapYAxis(point.getY()) - 2);
 			}
 
+			//only for linear regression
 			double s0 = getS0();
 			double s1 = getS1();
 
 			// function
+			PolynomialFuntion pf=new PolynomialFuntion();
+			for (int i = 0; i < weights.getDimension(); i++) {
+				pf.addCoefficent(weights.getEntry(i));
+			}
+			
 			SimpleLinearRegresFunction alrf = new SimpleLinearRegresFunction();
 			alrf.setOffset(s0);
 			alrf.setRate(s1);
@@ -220,7 +226,7 @@ public class LinearRegresDrawPane extends JPanel {
 			if (drawFunction) {
 				List<Point2D> functionSamplePoints = new ArrayList<>();
 				for (double x = functionDefinitionMin; x <= functionDefinitionMax; x += functionSampleRate) {
-					functionSamplePoints.add(new Point2DDouble(x, alrf.getY(x)));
+					functionSamplePoints.add(new Point2DDouble(x, pf.getY(x)));
 				}
 				for (int i = 0; i < functionSamplePoints.size() - 1; i++) {
 					g.drawLine(mapXAxis(functionSamplePoints.get(i).getX()),
@@ -234,7 +240,7 @@ public class LinearRegresDrawPane extends JPanel {
 				g.setColor(Color.RED);
 				for (Iterator iterator = pointList.iterator(); iterator.hasNext();) {
 					Point2D point = (Point2D) iterator.next();
-					double yCalculated = alrf.getY(point.getX());
+					double yCalculated = pf.getY(point.getX());
 					g.drawLine(mapXAxis(point.getX()), mapYAxis(point.getY()), mapXAxis(point.getX()),
 							mapYAxis(yCalculated));
 				}
