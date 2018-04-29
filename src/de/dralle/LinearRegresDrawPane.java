@@ -147,8 +147,13 @@ public class LinearRegresDrawPane extends JPanel {
 			}
 			RealMatrix xMatrix=new Array2DRowRealMatrix(pointList.size(), k+1);
 			for (int i = 0; i < k+1; i++) {
-				for (int j = 0; j < pointList.size(); j++) {					
-					xMatrix.setEntry(j, i, Math.pow(pointList.get(j).getX(), i));			
+				for (int j = 0; j < pointList.size(); j++) {
+					if(i==0) {
+						xMatrix.setEntry(j, i, 1);
+					}else {
+						xMatrix.setEntry(j, i, Math.pow(pointList.get(j).getX(), i));
+					}
+								
 					
 				}
 			}

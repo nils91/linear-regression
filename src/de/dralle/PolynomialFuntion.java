@@ -10,7 +10,12 @@ public class PolynomialFuntion implements IFunction {
 	public double getY(double x) {
 		double sum=0;
 		for (int i = 0; i < coefficents.size(); i++) {
-			sum+=coefficents.get(i)*Math.pow(x, i);
+			if(i==0) {
+				sum+=coefficents.get(i)*1;
+			}else {
+				sum+=coefficents.get(i)*Math.pow(x, i);
+			}
+			
 		}
 		return sum;
 	}
