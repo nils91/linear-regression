@@ -260,7 +260,7 @@ public class LinearRegresDrawPane extends JPanel {
 				avg+=errors[i];
 			}
 			avg/=errors.length;
-			System.out.println("Avegare error: "+avg);
+			System.out.println("Average error: "+avg);
 			if (drawResiduals) {
 				// residuals
 				g.setColor(Color.RED);

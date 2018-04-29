@@ -31,10 +31,17 @@ public class Point2DDouble extends Point2D {
 
 	@Override
 	public void setLocation(double x, double y) {
-		// TODO Auto-generated method stub
+		this.x = x;
+		this.y = y;
 
 	}
 	public Point2DDouble() {
 		super();
 	}
+
+	@Override
+	public String toString() {
+		return "X: "+x+", Y: "+y;
+	}
+	
 }
