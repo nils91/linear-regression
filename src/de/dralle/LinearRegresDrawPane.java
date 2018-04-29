@@ -163,6 +163,11 @@ public class LinearRegresDrawPane extends JPanel {
 			RealMatrix inverseWithXMatrixTransposed = inverse.multiply(xMatrix.transpose());
 			RealVector weights = inverseWithXMatrixTransposed.operate(y);
 			
+			//print weights
+			for (int i = 0; i < weights.getDimension(); i++) {
+				System.out.println("w0: "+weights.getEntry(i));
+			}
+			
 			Dimension drawArea = getSize();
 			g.setColor(Color.BLACK);
 			// draw lines
@@ -240,6 +245,22 @@ public class LinearRegresDrawPane extends JPanel {
 							mapYAxis(functionSamplePoints.get(i + 1).getY()));
 				}
 			}
+			//calculate absolute errors
+			double[] errors=new double[pointList.size()];
+			for (int i = 0; i < errors.length; i++) {
+				Point2D point = pointList.get(i);
+				double yCalculated = pf.getY(point.getX());
+				errors[i]=Math.abs(yCalculated-point.getY());
+				//print
+				System.out.println("Absolute error for point "+point+" is "+errors[i]);
+			}
+			//calculate and print avg error
+			double avg=0;
+			for (int i = 0; i < errors.length; i++) {
+				avg+=errors[i];
+			}
+			avg/=errors.length;
+			System.out.println("Avegare error: "+avg);
 			if (drawResiduals) {
 				// residuals
 				g.setColor(Color.RED);
