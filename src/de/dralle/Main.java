@@ -27,23 +27,43 @@ public class Main {
 		//
 		List<Point2D> pointList=new ArrayList();
 		
-		pointList.add(new Point2DDouble(0, 1));
+//		pointList.add(new Point2DDouble(0, 1));
+//		pointList.add(new Point2DDouble(1, 1));
+//		pointList.add(new Point2DDouble(2, 4));
+//		pointList.add(new Point2DDouble(3, 8));
+//		pointList.add(new Point2DDouble(4, 16));
+//		pointList.add(new Point2DDouble(5, 32));
+//		pointList.add(new Point2DDouble(6, 64));
+//		pointList.add(new Point2DDouble(7, 128));
+//		pointList.add(new Point2DDouble(8, 256));
+//		coordinateSystemOriginOnScreen=new Point(50,350);
+//		drawPane.setCoordinateSystemInternalOrigin(new Point2DDouble(0, 0));
+//		drawPane.setCoordinateSystemInternalPosSize(new Dimension(10, 300));
+//		drawPane.setxScale(1);
+//		drawPane.setyScale(25);
+//		drawPane.setFunctionDefinitionMin(-1);
+//		drawPane.setFunctionDefinitionMax(9);
+//		drawPane.setFunctionSampleRate(0.1);
+//		drawPane.setK(2);
+		
+		pointList.add(new Point2DDouble(-4, 16));
+		pointList.add(new Point2DDouble(-3, 9));
+		pointList.add(new Point2DDouble(-2, 4));
+		pointList.add(new Point2DDouble(-1, 1));
+		pointList.add(new Point2DDouble(0, 0));
 		pointList.add(new Point2DDouble(1, 1));
 		pointList.add(new Point2DDouble(2, 4));
-		pointList.add(new Point2DDouble(3, 8));
+		pointList.add(new Point2DDouble(3, 9));
 		pointList.add(new Point2DDouble(4, 16));
-		pointList.add(new Point2DDouble(5, 32));
-		pointList.add(new Point2DDouble(6, 64));
-		pointList.add(new Point2DDouble(7, 128));
-		pointList.add(new Point2DDouble(8, 256));
-		coordinateSystemOriginOnScreen=new Point(50,350);
+		coordinateSystemOriginOnScreen=new Point(400,500);
 		drawPane.setCoordinateSystemInternalOrigin(new Point2DDouble(0, 0));
-		drawPane.setCoordinateSystemInternalPosSize(new Dimension(10, 300));
+		drawPane.setCoordinateSystemInternalPosSize(new Dimension(6, 20));
 		drawPane.setxScale(1);
-		drawPane.setyScale(25);
-		drawPane.setFunctionDefinitionMin(-1);
-		drawPane.setFunctionDefinitionMax(9);
-		drawPane.setFunctionSampleRate(1);
+		drawPane.setyScale(5);
+		drawPane.setFunctionDefinitionMin(-5);
+		drawPane.setFunctionDefinitionMax(5);
+		drawPane.setFunctionSampleRate(0.1);
+		drawPane.setK(2);
 		
 //		pointList.add(new Point2DDouble(155,51));
 //		pointList.add(new Point2DDouble(162, 55));
