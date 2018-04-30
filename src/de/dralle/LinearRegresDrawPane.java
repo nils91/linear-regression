@@ -165,7 +165,7 @@ public class LinearRegresDrawPane extends JPanel {
 			
 			//print weights
 			for (int i = 0; i < weights.getDimension(); i++) {
-				System.out.println("w0: "+weights.getEntry(i));
+				System.out.println("w"+i+": "+weights.getEntry(i));
 			}
 			
 			Dimension drawArea = getSize();
