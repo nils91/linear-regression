@@ -19,5 +19,10 @@ public class SimpleLinearRegresFunction implements IFunction{
 	public double getY(double x) {
 		return offset+rate*x;
 	}
+	@Override
+	public String toString() {
+		return "f(x)="+offset+"+"+rate+"x²";
+	}
+	
 	
 }
