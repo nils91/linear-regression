@@ -54,7 +54,7 @@ public class Main {
 		pointList.add(new Point2DDouble(1, 1));
 		pointList.add(new Point2DDouble(2, 4));
 		pointList.add(new Point2DDouble(3, 9));
-		pointList.add(new Point2DDouble(4, 16));
+		pointList.add(new Point2DDouble(4, 15));
 		coordinateSystemOriginOnScreen=new Point(400,500);
 		drawPane.setCoordinateSystemInternalOrigin(new Point2DDouble(0, 0));
 		drawPane.setCoordinateSystemInternalPosSize(new Dimension(6, 20));
@@ -63,7 +63,7 @@ public class Main {
 		drawPane.setFunctionDefinitionMin(-5);
 		drawPane.setFunctionDefinitionMax(5);
 		drawPane.setFunctionSampleRate(0.1);
-		drawPane.setK(2);
+		drawPane.setK(1);
 		
 //		pointList.add(new Point2DDouble(155,51));
 //		pointList.add(new Point2DDouble(162, 55));

@@ -231,6 +231,10 @@ public class LinearRegresDrawPane extends JPanel {
 			SimpleLinearRegresFunction alrf = new SimpleLinearRegresFunction();
 			alrf.setOffset(s0);
 			alrf.setRate(s1);
+			
+			//print functions
+			System.out.println("Polynomial function: "+pf);
+			System.out.println("Linear function: "+alrf);
 
 			// line
 			if (drawFunction) {

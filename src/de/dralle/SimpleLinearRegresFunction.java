@@ -21,7 +21,7 @@ public class SimpleLinearRegresFunction implements IFunction{
 	}
 	@Override
 	public String toString() {
-		return "f(x)="+offset+"+"+rate+"x²";
+		return "f(x)="+offset+"+"+rate+"x";
 	}
 	
 	
