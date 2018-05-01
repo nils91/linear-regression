@@ -227,6 +227,10 @@ public class LinearRegresDrawPane extends JPanel {
 			for (int i = 0; i < weights.getDimension(); i++) {
 				pf.addCoefficent(weights.getEntry(i));
 			}
+//			System.out.println("Calculating additional data point for 150: "+pf.getY(150));
+//			System.out.println("Calculating additional data point for 210: "+pf.getY(210));
+//			System.out.println("Calculating additional data point for 193: "+pf.getY(192.2621));
+//			System.out.println("Calculating additional data point for 78: "+pf.getY(78.4949));
 			
 			SimpleLinearRegresFunction alrf = new SimpleLinearRegresFunction();
 			alrf.setOffset(s0);
@@ -249,22 +253,21 @@ public class LinearRegresDrawPane extends JPanel {
 							mapYAxis(functionSamplePoints.get(i + 1).getY()));
 				}
 			}
-			//calculate absolute errors
+			//calculate errors squared
 			double[] errors=new double[pointList.size()];
 			for (int i = 0; i < errors.length; i++) {
 				Point2D point = pointList.get(i);
 				double yCalculated = pf.getY(point.getX());
-				errors[i]=Math.abs(yCalculated-point.getY());
+				errors[i]=Math.pow(yCalculated-point.getY(),2);
 				//print
-				System.out.println("Absolute error for point "+point+" is "+errors[i]);
+				System.out.println("Squared error for point "+point+" is "+errors[i]);
 			}
-			//calculate and print avg error
-			double avg=0;
+			//calculate and print total error
+			double total=0;
 			for (int i = 0; i < errors.length; i++) {
-				avg+=errors[i];
+				total+=errors[i];
 			}
-			avg/=errors.length;
-			System.out.println("Average error: "+avg);
+			System.out.println("Total error: "+total);
 			if (drawResiduals) {
 				// residuals
 				g.setColor(Color.RED);
